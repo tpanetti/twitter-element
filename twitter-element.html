@@ -1,0 +1,84 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-card/paper-card.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-form/iron-form.html">
+<link rel="import" href="../paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../krumponent-sprocket-data/krumponent-sprocket-data.html">
+<!--
+`twitter-element`
+twitter
+
+@demo demo/index.html
+-->
+
+<dom-module id="twitter-element">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      #twitter{
+          height: 500px;
+          width: 300px;
+          border-radius: 25px;
+          background-color: aliceblue;
+      }
+    </style>
+
+
+
+    <iron-pages attr-for-selected="key" fallback-selection="default" id="twitterpages">
+      <div id='mainpage' key="default">
+        <form is="iron-form" id="twitter">
+          <div id="title"> Twitter </div>
+          <paper-input value="{{username}}" label="Enter a public username"></paper-input>
+          <paper-button raised on-tap="getUserFeed">Find User</paper-button>
+          <paper-input value="{{keyword}}" label="Search for a specific keyword"></paper-input>
+          <paper-button raised on-tap="getKeywordFeed">Search</paper-button>
+        </form>
+      </div>
+
+      <div id='userFeed' key="userFeed">
+        <form is="iron-form" id="twitter">
+          <div id="title"> User Feed </div>
+          <div id="feed">
+          </div>
+        </form>
+      </div>
+
+      <div key="keywordFeed">
+        <form is="iron-form" id="twitter">
+          <div id="title"> Keyword Feed </div>
+          <krumponent-sprocket-data sprocket-secret="asd" sprocket-user="asd" sprocket-stream="5848aee9a953511f007ece3c" data="{{data}}" auto log></krumponent-sprocket-data>
+          <div>{{data.payload.description}}</div>
+        </form>
+      </div>
+    </iron-pages>
+
+  </template>
+
+  <script>
+    Polymer({
+
+      is: 'twitter-element',
+
+      properties: {
+        prop1: {
+          type: String,
+          value: 'twitter-element'
+        },
+      },
+      getUserFeed: function(){
+          var page = this.$.twitterpages;
+          page.select('userFeed');
+          var profileURL = "https://twitter.com/" + this.username;
+          var tmp = "twitter-timeline";
+          //document.getElementById("feed").innerHTML() = profileURL;
+      },
+    });
+  </script>
+</dom-module>
