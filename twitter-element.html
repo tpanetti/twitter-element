@@ -36,7 +36,7 @@ twitter
         <form is="iron-form" id="twitter">
           <div id="title"> Twitter </div>
           <paper-input value="{{username}}" label="Enter a public username"></paper-input>
-          <paper-button raised on-tap="getUserFeed">Find User</paper-button>
+          <paper-button id="userFeedButton" raised on-tap="getUserFeed">Find User</paper-button>
           <paper-input value="{{keyword}}" label="Search for a specific keyword"></paper-input>
           <paper-button raised on-tap="getKeywordFeed">Search</paper-button>
         </form>
@@ -71,8 +71,13 @@ twitter
           type: String,
           value: 'twitter-element'
         },
+        userPage: {
+          type: Boolean,
+          value: false
+        }
       },
       getUserFeed: function(){
+          this.userPage = true;
           var page = this.$.twitterpages;
           page.select('userFeed');
           var profileURL = "https://twitter.com/" + this.username;

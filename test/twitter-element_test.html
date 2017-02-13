@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
 
     <title>twitter-element test</title>
-
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
 
@@ -14,15 +13,25 @@
   <body>
     <test-fixture id="basic">
       <template>
-        <twitter-element></twitter-element>
+        <twitter-element id="test"></twitter-element>
       </template>
     </test-fixture>
 
     <script>
-      suite('twitter-element', function() {
+      suite('<twitter-element>', function() {
+        var myEl;
+        setup(function(){
+          myEl = fixture("basic");
+        });
         test('instantiating the element works', function() {
-          var element = fixture('basic');
-          assert.equal(element.is, 'twitter-element');
+          assert.equal(myEl.is, 'twitter-element');
+        });
+        test('click sets users to true', function() {
+          if(myEl == null)
+            console.log("Why"); 
+          console.log(myEl);
+          myEl.$.userFeedButton.click();
+          assert(myEl.userPage, true);
         });
       });
     </script>

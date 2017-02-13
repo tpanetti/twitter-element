@@ -1,0 +1,11 @@
+{
+    "entrypoint":"index.html",
+    "shell":"twitter-element.html",
+    "sourceGlobs": [
+        "bower.json"
+    ],
+    "includeDependencies":[
+        "manifest.json",
+        "bower_components/webcomponentsjs/webcomponents-lite.min.js"
+    ]
+}
